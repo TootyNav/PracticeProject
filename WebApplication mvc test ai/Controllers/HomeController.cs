@@ -10,12 +10,12 @@ namespace WebApplication_mvc_test_ai.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
-        private readonly TelemetryClient telemetryClient;
+        private readonly TelemetryClient TelemetryClient;
 
         public HomeController(ILogger<HomeController> logger, TelemetryConfiguration telemetryConfiguration)
         {
             _logger = logger;
-            this.telemetryClient = new TelemetryClient(telemetryConfiguration);
+            TelemetryClient = new TelemetryClient(telemetryConfiguration);
 
         }
 
@@ -26,6 +26,10 @@ namespace WebApplication_mvc_test_ai.Controllers
 
         public IActionResult Privacy()
         {
+            _logger.LogInformation("An example of a Information trace..");
+            _logger.LogWarning("An example of a Warning trace..");
+            _logger.LogError("An example of an Error level message");
+
             return View();
         }
 
@@ -39,21 +43,16 @@ namespace WebApplication_mvc_test_ai.Controllers
             return View();
         }
 
-        public IActionResult Privacy4()
+        public IActionResult Privacy4(string parameterOne = "FakeParameter")
         {
 
-            _logger.LogInformation("Privacy 4 before error.");
 
             // Add custom properties
-            var telemetry = new TelemetryClient();
-
             var requestTelemetry = new RequestTelemetry();
             requestTelemetry.Properties.Add("MyCustomProperty", "MyCustomValueeee");
-            telemetry.TrackRequest(requestTelemetry);
+            TelemetryClient.TrackRequest(requestTelemetry);
 
             throw new NotImplementedException();
-
-            _logger.LogInformation("Privacy 4 after error.");
 
             return View();
         }

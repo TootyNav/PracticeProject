@@ -1,6 +1,7 @@
 using Microsoft.ApplicationInsights.Extensibility;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging.ApplicationInsights;
 using WebApplication_mvc_test_ai;
 using WebApplication_mvc_test_ai.Data;
 
@@ -21,6 +22,12 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 builder.Services.AddSingleton<ITelemetryInitializer, TelemetryEnrichment>();
 
+//builder.Services.AddHttpLogging(httpLogging =>
+//{
+//    httpLogging.LoggingFields = Microsoft.AspNetCore.HttpLogging.HttpLoggingFields.All;
+//});
+
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -35,6 +42,7 @@ else
     app.UseHsts();
 }
 
+//app.UseHttpLogging();
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 

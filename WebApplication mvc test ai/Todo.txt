@@ -1,0 +1,11 @@
+
+the line below is wrong, the connection string is null but still works
+builder.Services.AddApplicationInsightsTelemetry(builder.Configuration["APPLICATIONINSIGHTS_CONNECTION_STRING"]);
+
+
+
+
+added a new package check it
+
+logger.loginformation isnt showing on application isnights, only warning is.
+log detailed information like ford was selected in red.
