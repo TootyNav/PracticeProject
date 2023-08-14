@@ -28,7 +28,8 @@ namespace WebApplication_mvc_test_ai.Controllers
         {
             _logger.LogInformation("An example of a Information trace..");
             _logger.LogWarning("An example of a Warning trace..");
-            _logger.LogError("An example of an Error level message");
+            _logger.LogError(new ArgumentNullException(), "An example of an Error level message");
+            _logger.LogDebug("An example of an Error level message parameter name is:\"James\"");
 
             return View();
         }
