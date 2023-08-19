@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging.ApplicationInsights;
 using WebApplication_mvc_test_ai;
 using WebApplication_mvc_test_ai.Data;
+using WorkerService1;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -24,6 +25,7 @@ builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 builder.Services.AddSingleton<ITelemetryInitializer, TelemetryEnrichment>();
 
 builder.Services.AddApplicationInsightsTelemetry(c => c.ConnectionString = builder.Configuration["APPLICATIONINSIGHTS:CONNECTION_STRING"]);
+builder.Services.AddHostedService<Worker>();
 
 var app = builder.Build();
 
