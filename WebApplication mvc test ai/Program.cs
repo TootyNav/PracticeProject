@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging.ApplicationInsights;
 using WebApplication_mvc_test_ai;
 using WebApplication_mvc_test_ai.Data;
-using WebApplication_mvc_test_ai.Services;
+using WorkerService1;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -19,14 +19,13 @@ builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
     .AddEntityFrameworkStores<ApplicationDbContext>();
 
-builder.Services.AddControllersWithViews().AddRazorRuntimeCompilation();
+
+builder.Services.AddControllersWithViews();
 builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 builder.Services.AddSingleton<ITelemetryInitializer, TelemetryEnrichment>();
 
 builder.Services.AddApplicationInsightsTelemetry(c => c.ConnectionString = builder.Configuration["APPLICATIONINSIGHTS:CONNECTION_STRING"]);
-
 builder.Services.AddHostedService<Worker>();
-//builder.Services.AddHostedService<MyBackgroundService>();
 
 var app = builder.Build();
 

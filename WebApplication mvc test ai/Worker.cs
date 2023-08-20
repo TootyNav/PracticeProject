@@ -1,4 +1,4 @@
-namespace WebApplication_mvc_test_ai.Services
+namespace WorkerService1
 {
     public class Worker : BackgroundService
     {
