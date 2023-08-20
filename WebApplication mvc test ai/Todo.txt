@@ -1,11 +1,8 @@
+Test Application insights with ajax call and error handding. go to privacy page for that.
 
-the line below is wrong, the connection string is null but still works
-builder.Services.AddApplicationInsightsTelemetry(builder.Configuration["APPLICATIONINSIGHTS_CONNECTION_STRING"]);
-
-
-
-
-added a new package check it
-
-logger.loginformation isnt showing on application isnights, only warning is.
-log detailed information like ford was selected in red.
+to do
+add an api end point that takes numbers
+do something with the numbers with background service
+put them on a a buss
+absurb them in another project
+show them on screen
