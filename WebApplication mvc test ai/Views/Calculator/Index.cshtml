@@ -1,6 +1,36 @@
-﻿
+﻿@{
+    ViewData["Title"] = "Calculation stuff";
+}
+
+<h1 class="mb-3">Random Calculation stuff</h1>
+
+<div class="row">
 
 
+    <div class="col-lg-4">
+        <div class="card border-danger mb-3" style="max-width: 20rem;">
+            <div class="card-header">Give me a number!</div>
+            <div class="card-body">
+                <h4 class="card-title">Input a number for the calculator</h4>
+                <div class="input-group mb-3 mt-3">
+                    <input type="text" class="form-control" placeholder="232" aria-label="Random Number" aria-describedby="button-addon2">
+                    <button class="btn btn-primary" type="button" id="button-addon2">Calculate</button>
+                </div>
+                <p class="card-text">I will take this number, send it to azure service bus, receive it again and add 10 to it in a background service. Update the page with signalR.</p>
+            </div>
+        </div>
 
-<h1>Random Calculation stuff</h1>
+    </div>
 
+    <div class="col-lg-4">
+        <div class="card text-white bg-primary mb-3" style="max-width: 20rem;">
+            <div class="card-header">Its Magic!</div>
+            <div class="card-body">
+                <h4 class="card-title">Here is your number + 150</h4>
+                <input class="form-control" id="disabledInput" type="text" placeholder="1500" disabled="">
+                <p class="card-text">We used azure buses and background services and signalR to do this.</p>
+            </div>
+        </div>
+    </div>
+
+</div>
