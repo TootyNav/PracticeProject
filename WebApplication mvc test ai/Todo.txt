@@ -1,8 +1,10 @@
-Test Application insights with ajax call and error handding. go to privacy page for that.
 
-to do
-add an api end point that takes numbers
-do something with the numbers with background service
-put them on a a buss
-absurb them in another project
-show them on screen
+
+
+
+Add a page for chat
+intake a number
+put it in a bus message
+do calculation in a background service
+send it back on a buss
+resive and display with signalR
