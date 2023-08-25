@@ -12,10 +12,16 @@
             <div class="card-header">Give me a number!</div>
             <div class="card-body">
                 <h4 class="card-title">Input a number for the calculator</h4>
+
                 <div class="input-group mb-3 mt-3">
-                    <input type="text" class="form-control" placeholder="232" aria-label="Random Number" aria-describedby="button-addon2">
-                    <button class="btn btn-primary" type="button" id="button-addon2">Calculate</button>
+                    <form action="/calculator/ChangeNumber" method="post">
+                        <input type="text" class="form-control" placeholder="232" aria-label="Random Number" aria-describedby="button-addon2">
+                        <button class="btn btn-primary" type="submit" id="button-addon2">Calculate</button>
+                    </form>
+
                 </div>
+
+
                 <p class="card-text">I will take this number, send it to azure service bus, receive it again and add 10 to it in a background service. Update the page with signalR.</p>
             </div>
         </div>

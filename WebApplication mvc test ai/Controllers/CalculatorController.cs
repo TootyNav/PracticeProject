@@ -8,5 +8,12 @@ namespace WebApplication_mvc_test_ai.Controllers
         {
             return View();
         }
+
+        public IActionResult ChangeNumber(int userNumber)
+        {
+
+
+            return NoContent();
+        }
     }
 }
