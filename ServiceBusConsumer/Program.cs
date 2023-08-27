@@ -6,12 +6,10 @@ IHost host = Host.CreateDefaultBuilder(args)
     .ConfigureServices(services =>
     {
         services.AddHostedService<CalculatorConsumer>();
-
         var configuration = new ConfigurationBuilder().AddUserSecrets<Program>().Build();
 
-
         services.AddSingleton<ISubscriptionClient>(x => 
-        new SubscriptionClient(configuration["ServiceBus:CONNECTION_STRING"], configuration["ServiceBus:TopicName"], configuration["ServiceBus:SubscriptionName"]));
+            new SubscriptionClient(configuration["ServiceBus:CONNECTION_STRING"], configuration["ServiceBus:TopicName"], configuration["ServiceBus:SubscriptionName"]));
     })
     .Build();
 
