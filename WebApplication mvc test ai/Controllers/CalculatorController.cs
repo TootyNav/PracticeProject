@@ -5,10 +5,10 @@ namespace WebApplication_mvc_test_ai.Controllers
 {
     public class CalculatorController : Controller
     {
-        private IMessagePublisher _massagePublisher;
-        public CalculatorController(IMessagePublisher massagePublisher)
+        private IMessagePublisher _messagePublisher;
+        public CalculatorController(IMessagePublisher messagePublisher)
         {
-            _massagePublisher = massagePublisher;
+            _messagePublisher = messagePublisher;
         }
 
         public IActionResult Index()
@@ -18,7 +18,7 @@ namespace WebApplication_mvc_test_ai.Controllers
 
         public IActionResult ChangeNumber(int userNumber)
         {
-            _massagePublisher.Publish(userNumber);
+            _messagePublisher.Publish(userNumber);
 
             return NoContent();
         }

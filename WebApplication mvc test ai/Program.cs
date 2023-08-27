@@ -24,8 +24,9 @@ builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.Requ
 builder.Services.AddControllersWithViews().AddRazorRuntimeCompilation();
 builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 builder.Services.AddSingleton<ITelemetryInitializer, TelemetryEnrichment>();
-builder.Services.AddSingleton<IQueueClient>(x =>new QueueClient(builder.Configuration["ServiceBus:CONNECTION_STRING"], builder.Configuration["ServiceBus:QueueName"]));
-builder.Services.AddSingleton<IMessagePublisher, MessagePublisher>();
+//builder.Services.AddSingleton<IQueueClient>(x =>new QueueClient(builder.Configuration["ServiceBus:CONNECTION_STRING"], builder.Configuration["ServiceBus:QueueName"]));
+builder.Services.AddSingleton<ITopicClient>(x =>new TopicClient(builder.Configuration["ServiceBus:CONNECTION_STRING"], builder.Configuration["ServiceBus:TopicName"]));
+builder.Services.AddSingleton<IMessagePublisher, MessageTopicPublisher>();
 
 builder.Services.AddApplicationInsightsTelemetry(c => c.ConnectionString = builder.Configuration["APPLICATIONINSIGHTS:CONNECTION_STRING"]);
 builder.Services.AddHostedService<Worker>();
