@@ -1,4 +1,6 @@
-﻿@{
+﻿@Model int
+
+@{
     ViewData["Title"] = "Calculation stuff";
 }
 
@@ -15,7 +17,7 @@
 
                 <div class="input-group mb-3 mt-3">
                     <form action="/calculator/ChangeNumber" method="post">
-                        <input type="text" class="form-control" placeholder="232" aria-label="Random Number" aria-describedby="button-addon2">
+                        <input name="userNumber" type="text" class="form-control" placeholder="232" aria-label="Random Number" aria-describedby="button-addon2">
                         <button class="btn btn-primary" type="submit" id="button-addon2">Calculate</button>
                     </form>
 
