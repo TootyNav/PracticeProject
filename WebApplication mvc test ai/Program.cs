@@ -5,7 +5,6 @@ using Microsoft.EntityFrameworkCore;
 using WebApplication_mvc_test_ai;
 using WebApplication_mvc_test_ai.Data;
 using WebApplication_mvc_test_ai.Services;
-using WorkerService1;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -29,7 +28,6 @@ builder.Services.AddSingleton<ITopicClient>(x =>new TopicClient(builder.Configur
 builder.Services.AddSingleton<IMessagePublisher, MessageTopicPublisher>();
 
 builder.Services.AddApplicationInsightsTelemetry(c => c.ConnectionString = builder.Configuration["APPLICATIONINSIGHTS:CONNECTION_STRING"]);
-builder.Services.AddHostedService<Worker>();
 
 var app = builder.Build();
 
