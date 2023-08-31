@@ -4,6 +4,7 @@ using Microsoft.Azure.ServiceBus;
 using Microsoft.EntityFrameworkCore;
 using WebApplication_mvc_test_ai;
 using WebApplication_mvc_test_ai.Data;
+using WebApplication_mvc_test_ai.Hubs;
 using WebApplication_mvc_test_ai.Services;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -23,6 +24,8 @@ builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.Requ
 builder.Services.AddControllersWithViews().AddRazorRuntimeCompilation();
 builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 builder.Services.AddSingleton<ITelemetryInitializer, TelemetryEnrichment>();
+builder.Services.AddSignalR();
+
 //builder.Services.AddSingleton<IQueueClient>(x =>new QueueClient(builder.Configuration["ServiceBus:CONNECTION_STRING"], builder.Configuration["ServiceBus:QueueName"]));
 builder.Services.AddSingleton<ITopicClient>(x =>new TopicClient(builder.Configuration["ServiceBus:CONNECTION_STRING"], builder.Configuration["ServiceBus:TopicName"]));
 builder.Services.AddSingleton<IMessagePublisher, MessageTopicPublisher>();
@@ -55,5 +58,7 @@ app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
 app.MapRazorPages();
+app.MapHub<ChatHub>("/chatHub");
+
 
 app.Run();

@@ -4,6 +4,8 @@ using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 using WebApplication_mvc_test_ai.Models;
 using Microsoft.ApplicationInsights.Extensibility;
+using Microsoft.AspNetCore.SignalR;
+using WebApplication_mvc_test_ai.Hubs;
 
 namespace WebApplication_mvc_test_ai.Controllers
 {
@@ -11,16 +13,20 @@ namespace WebApplication_mvc_test_ai.Controllers
     {
         private readonly ILogger<HomeController> _logger;
         private readonly TelemetryClient TelemetryClient;
+        private readonly IHubContext<ChatHub> _hubContext;
 
-        public HomeController(ILogger<HomeController> logger, TelemetryConfiguration telemetryConfiguration)
+        public HomeController(ILogger<HomeController> logger, TelemetryConfiguration telemetryConfiguration, IHubContext<ChatHub> hubContext)
         {
             _logger = logger;
             TelemetryClient = new TelemetryClient(telemetryConfiguration);
-
+            _hubContext = hubContext;
         }
 
         public IActionResult Index()
         {
+            _hubContext.Clients.All.SendAsync("ReceiveMessage", "Hello World");
+            return View();
+
             return View();
         }
 
