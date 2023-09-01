@@ -1,16 +1,24 @@
+using Microsoft.AspNetCore.Builder;
 using Microsoft.Azure.ServiceBus;
 using ServiceBusConsumer;
-using Microsoft.Extensions.Configuration;
+using WebApplication_mvc_test_ai.Hubs;
 
-IHost host = Host.CreateDefaultBuilder(args)
-    .ConfigureServices(services =>
-    {
-        services.AddHostedService<CalculatorConsumer>();
-        var configuration = new ConfigurationBuilder().AddUserSecrets<Program>().Build();
+var builder = WebApplication.CreateBuilder(args);
 
-        services.AddSingleton<ISubscriptionClient>(x => 
-            new SubscriptionClient(configuration["ServiceBus:CONNECTION_STRING"], configuration["ServiceBus:TopicName"], configuration["ServiceBus:SubscriptionName"]));
-    })
-    .Build();
+builder.Services.AddHostedService<CalculatorConsumer>();
+builder.Services.AddSignalR();
 
-await host.RunAsync();
+var configuration = new ConfigurationBuilder().AddUserSecrets<Program>().Build();
+
+builder.Services.AddSingleton<ISubscriptionClient>(x =>
+    new SubscriptionClient(
+        configuration["ServiceBus:CONNECTION_STRING"],
+        configuration["ServiceBus:TopicName"],
+        configuration["ServiceBus:SubscriptionName"]));
+
+
+var app = builder.Build();
+
+app.MapHub<ChatHub>("/chatHub");
+
+app.Run();
