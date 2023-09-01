@@ -35,10 +35,25 @@
             <div class="card-header">Its Magic!</div>
             <div class="card-body">
                 <h4 class="card-title">Here is your number + 150</h4>
-                <input class="form-control" id="disabledInput" type="text" placeholder="1500" disabled="">
+                <input class="form-control" id="calculatorTotal" type="text" placeholder="1500" disabled="">
                 <p class="card-text">We used azure buses and background services and signalR to do this.</p>
             </div>
         </div>
     </div>
 
 </div>
+
+<script src="~/lib/microsoft/signalr/dist/browser/signalr.min.js"></script>
+
+<script>
+    var connection = new signalR.HubConnectionBuilder().withUrl("/chatHub").build();
+
+    connection.on("ReceiveMessage", function (message) {
+
+        document.getElementById("calculatorTotal").value = message;
+    });
+
+    connection.start().catch(function (err) {
+        return console.error(err.toString());
+    });
+</script>

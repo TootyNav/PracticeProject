@@ -24,11 +24,18 @@ namespace WebApplication_mvc_test_ai.Controllers
 
         public IActionResult Index()
         {
-            _hubContext.Clients.All.SendAsync("ReceiveMessage", "Hello World");
-            return View();
-
             return View();
         }
+
+        public IActionResult hello()
+        {
+            Random random = new Random();
+            int randomNumber = random.Next(101);
+            
+            _hubContext.Clients.All.SendAsync("ReceiveMessage", $"Hello World {randomNumber}");
+            return NoContent();
+        }
+
 
         public IActionResult Privacy()
         {

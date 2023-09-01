@@ -9,18 +9,25 @@
 
 <script src="~/lib/microsoft/signalr/dist/browser/signalr.min.js"></script>
 
-<label>Message: </label>
-<div id="messagesList"></div>
+<input class="form-control" id="calculatorTotal" type="text" placeholder="1500" disabled="">
+
+<a asp-action="hello">aaaaaaaaaaaaaaaaaaaaaaaaaaa</a>
 
 <script>
-    var connection = new signalR.HubConnectionBuilder().withUrl("/chatHub").build();
 
-    connection.on("ReceiveMessage", function (message) {
+    $(document).ready(function () {
 
-        alert(message);
+        var connection = new signalR.HubConnectionBuilder().withUrl("/chatHub").build();
+
+        connection.on("ReceiveMessage", function (message) {
+            document.getElementById("calculatorTotal").value = message;
+        });
+
+        connection.start().catch(function (err) {
+            return console.error(err.toString());
+        });
+
     });
 
-    connection.start().catch(function (err) {
-        return console.error(err.toString());
-    });
 </script>
+
