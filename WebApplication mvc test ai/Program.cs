@@ -2,6 +2,7 @@ using Microsoft.ApplicationInsights.Extensibility;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Azure.ServiceBus;
 using Microsoft.EntityFrameworkCore;
+using ServiceBusConsumer;
 using WebApplication_mvc_test_ai;
 using WebApplication_mvc_test_ai.Data;
 using WebApplication_mvc_test_ai.Hubs;
@@ -31,6 +32,7 @@ builder.Services.AddSingleton<ITopicClient>(x =>new TopicClient(builder.Configur
 builder.Services.AddSingleton<IMessagePublisher, MessageTopicPublisher>();
 
 builder.Services.AddApplicationInsightsTelemetry(c => c.ConnectionString = builder.Configuration["APPLICATIONINSIGHTS:CONNECTION_STRING"]);
+builder.Services.AddHostedService<CalculatorConsumer2>();
 
 var app = builder.Build();
 

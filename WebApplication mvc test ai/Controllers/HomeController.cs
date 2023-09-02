@@ -27,12 +27,12 @@ namespace WebApplication_mvc_test_ai.Controllers
             return View();
         }
 
-        public IActionResult hello()
+        public async Task<IActionResult> helloAsync()
         {
             Random random = new Random();
             int randomNumber = random.Next(101);
             
-            _hubContext.Clients.All.SendAsync("ReceiveMessage", $"Hello World {randomNumber}");
+            await _hubContext.Clients.All.SendAsync("ReceiveMessage", $"Hello World {randomNumber}");
             return NoContent();
         }
 

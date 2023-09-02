@@ -19,6 +19,6 @@ builder.Services.AddSingleton<ISubscriptionClient>(x =>
 
 var app = builder.Build();
 
-app.MapHub<ChatHub>("/chatHub");
+//app.MapHub<ChatHub>("/chatHub");
 
 app.Run();
