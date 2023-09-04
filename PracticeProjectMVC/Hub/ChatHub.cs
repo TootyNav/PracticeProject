@@ -1,6 +1,4 @@
 ﻿using Microsoft.AspNetCore.SignalR;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.SignalR;
 
 namespace WebApplication_mvc_test_ai.Hubs;
 

@@ -27,7 +27,7 @@ namespace WebApplication_mvc_test_ai.Controllers
             return View();
         }
 
-        public async Task<IActionResult> helloAsync()
+        public async Task<IActionResult> HelloSignalRAsync()
         {
             Random random = new Random();
             int randomNumber = random.Next(101);
