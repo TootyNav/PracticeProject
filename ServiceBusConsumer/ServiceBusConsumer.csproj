@@ -16,6 +16,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\WebApplication mvc test ai\WebApplication mvc test ai.csproj" />
+    <ProjectReference Include="..\WebApplication mvc test ai\PracticeProjectMVC.csproj" />
   </ItemGroup>
 </Project>
