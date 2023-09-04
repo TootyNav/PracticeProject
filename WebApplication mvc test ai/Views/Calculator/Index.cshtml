@@ -9,7 +9,7 @@
 <div class="row">
 
 
-    <div class="col-lg-4"> 
+    <div class="col-lg-4">
         <div class="card border-danger mb-3" style="max-width: 20rem;">
             <div class="card-header">Give me a number!</div>
             <div class="card-body">
@@ -17,14 +17,22 @@
 
                 <div class="input-group mb-3 mt-3">
                     <form action="/calculator/ChangeNumber" method="post">
-                        <input name="userNumber" type="text" class="form-control" placeholder="232" aria-label="Random Number" aria-describedby="button-addon2">
-                        <button class="btn btn-primary" type="submit" id="button-addon2">Calculate</button>
+                        <div class="form-group">
+                            <div class="input-group">
+                                <input class="form-control" name="userNumber" type="text" placeholder="232" aria-label="Random Number" aria-describedby="button-addon2">
+                                <div class="input-group-append">
+                                    <button class="btn btn-primary form-control" type="submit" id="button-addon2">Calculate</button>
+                                </div>
+                            </div>
+                        </div>
                     </form>
 
                 </div>
 
-
-                <p class="card-text">I will take this number, send it to azure service bus, receive it again and add 10 to it in a background service. Update the page with signalR.</p>
+                <p class="card-text">
+                    I will take this number, send it to azure service bus,
+                    receive it again and add 150 to it in a background service. Update the page with signalR.
+                </p>
             </div>
         </div>
 
