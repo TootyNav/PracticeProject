@@ -36,7 +36,7 @@ namespace ServiceBusConsumer
             _subscriptionClient.RegisterMessageHandler(async (message, tokent) =>
             {
                 var number = JsonConvert.DeserializeObject<int>(Encoding.UTF8.GetString(message.Body));
-                 total = 150 + number;
+                total = 150 + number;
 
                 _logger.LogInformation("number is: {number} and we add 150 to get: {total}", number, total);
 
@@ -49,10 +49,12 @@ namespace ServiceBusConsumer
                 MaxConcurrentCalls = 1,
             });
 
-            await hubConnection.DisposeAsync();
             await Task.CompletedTask;
+
+            if (stoppingToken.IsCancellationRequested)
+            {
+                await hubConnection.DisposeAsync();
+            }
         }
-
-
     }
 }
