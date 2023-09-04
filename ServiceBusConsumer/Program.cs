@@ -1,9 +1,6 @@
-using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.SignalR;
-using Microsoft.AspNetCore.SignalR.Client;
+
 using Microsoft.Azure.ServiceBus;
 using ServiceBusConsumer;
-using WebApplication_mvc_test_ai.Hubs;
 
 var builder = WebApplication.CreateBuilder(args);
 
