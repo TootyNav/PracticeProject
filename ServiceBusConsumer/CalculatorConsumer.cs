@@ -1,6 +1,8 @@
 using Microsoft.AspNetCore.SignalR;
+using Microsoft.AspNetCore.SignalR.Client;
+using Microsoft.Azure.Amqp.Framing;
 using Microsoft.Azure.ServiceBus;
-using WebApplication_mvc_test_ai.Hubs;
+//using WebApplication_mvc_test_ai.Hubs;
 
 namespace ServiceBusConsumer
 {
@@ -8,28 +10,41 @@ namespace ServiceBusConsumer
     {
         private readonly ILogger<CalculatorConsumer> _logger;
         private readonly ISubscriptionClient _subscriptionClient;
-        private readonly IHubContext<ChatHub> _hubContext;
 
         public CalculatorConsumer(
             ILogger<CalculatorConsumer> logger,
-            ISubscriptionClient subscriptionClient,
-            IHubContext<ChatHub> hubContext)
+            ISubscriptionClient subscriptionClient)
         {
             _logger = logger;
             _subscriptionClient = subscriptionClient;
-            _hubContext = hubContext;
         }
 
         protected override async Task ExecuteAsync(CancellationToken stoppingToken)
         {
 
+            var hubConnection = new HubConnectionBuilder().WithUrl("https://localhost:7084/chatHub").Build();
+            await hubConnection.StartAsync();
+
+
+            hubConnection.On<string, string>("ReceiveMessage", (user, message) =>
+            {
+                var encodedMsg = $"{user}: {message}";
+                message = user + message;
+            });
+
             while (!stoppingToken.IsCancellationRequested)
             {
                 _logger.LogInformation("Worker running at: {Time}", DateTime.Now);
-                await _hubContext.Clients.All.SendAsync("ReceiveMessage", "userStuff" ,"10");
-                await Task.Delay(1000, stoppingToken);
+                await hubConnection.SendAsync("SendMessage", "workerservice ", "10");
+                await Task.Delay(3000, stoppingToken);
             }
+            await hubConnection.DisposeAsync();
         }
+
+
+
+
+
 
         //protected override async Task ExecuteAsync(CancellationToken stoppingToken)
         //{

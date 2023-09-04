@@ -32,7 +32,7 @@ builder.Services.AddSingleton<ITopicClient>(x =>new TopicClient(builder.Configur
 builder.Services.AddSingleton<IMessagePublisher, MessageTopicPublisher>();
 
 builder.Services.AddApplicationInsightsTelemetry(c => c.ConnectionString = builder.Configuration["APPLICATIONINSIGHTS:CONNECTION_STRING"]);
-builder.Services.AddHostedService<CalculatorConsumer2>();
+//builder.Services.AddHostedService<CalculatorConsumer2>();
 
 var app = builder.Build();
 

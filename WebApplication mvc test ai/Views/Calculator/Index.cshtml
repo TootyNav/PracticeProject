@@ -48,9 +48,9 @@
 <script>
     var connection = new signalR.HubConnectionBuilder().withUrl("/chatHub").build();
 
-    connection.on("ReceiveMessage", function (message) {
+    connection.on("ReceiveMessage", function (user, message) {
 
-        document.getElementById("calculatorTotal").value = message;
+        document.getElementById("calculatorTotal").value = user + message;
     });
 
     connection.start().catch(function (err) {

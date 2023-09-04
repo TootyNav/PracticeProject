@@ -32,7 +32,7 @@ namespace WebApplication_mvc_test_ai.Controllers
             Random random = new Random();
             int randomNumber = random.Next(101);
             
-            await _hubContext.Clients.All.SendAsync("ReceiveMessage", $"Hello World {randomNumber}");
+            await _hubContext.Clients.All.SendAsync("ReceiveMessage", "Home Controller ", $"Hello World {randomNumber}");
             return NoContent();
         }
 
