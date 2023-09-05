@@ -12,6 +12,8 @@ namespace ServiceBusConsumer
     {
         private readonly ILogger<CalculatorConsumer> _logger;
         private readonly ISubscriptionClient _subscriptionClient;
+        private readonly IConfiguration Configuration;
+        private readonly string SignalRUrl;
 
         public CalculatorConsumer(
             ILogger<CalculatorConsumer> logger,
@@ -19,11 +21,19 @@ namespace ServiceBusConsumer
         {
             _logger = logger;
             _subscriptionClient = subscriptionClient;
+
+
+            Configuration = new ConfigurationBuilder()
+                .SetBasePath(Directory.GetCurrentDirectory())
+                .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true).Build();
+
+            SignalRUrl = Configuration["SignalRURL"];
         }
 
         protected override async Task ExecuteAsync(CancellationToken stoppingToken)
         {
-            var hubConnection = new HubConnectionBuilder().WithUrl("https://localhost:7084/chatHub").Build();
+            var hubConnection = new HubConnectionBuilder().WithUrl(SignalRUrl).Build();
+            //var hubConnection = new HubConnectionBuilder().WithUrl("https://testazurewebappnav.azurewebsites.net/chatHub").Build();
             await hubConnection.StartAsync();
 
             hubConnection.On<string, string>("ReceiveMessage", (user, message) =>

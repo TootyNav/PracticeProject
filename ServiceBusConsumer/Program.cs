@@ -7,7 +7,6 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddHostedService<CalculatorConsumer>();
 builder.Services.AddSignalR();
 
-var configuration = new ConfigurationBuilder().AddUserSecrets<Program>().Build();
 
 builder.Services.AddSingleton<ISubscriptionClient>(x =>
     new SubscriptionClient(
