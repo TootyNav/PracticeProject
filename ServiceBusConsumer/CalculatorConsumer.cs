@@ -1,11 +1,8 @@
 using Microsoft.AspNetCore.SignalR;
 using Microsoft.AspNetCore.SignalR.Client;
-using Microsoft.Azure.Amqp.Framing;
 using Microsoft.Azure.ServiceBus;
-using Microsoft.Extensions.Hosting;
 using Newtonsoft.Json;
 using System.Text;
-//using WebApplication_mvc_test_ai.Hubs;
 
 namespace ServiceBusConsumer
 {
@@ -14,33 +11,24 @@ namespace ServiceBusConsumer
         private readonly ILogger<CalculatorConsumer> _logger;
         private readonly ISubscriptionClient _subscriptionClient;
         private readonly IConfiguration Configuration;
-        private readonly IWebHostEnvironment _env;
 
         public CalculatorConsumer(
             ILogger<CalculatorConsumer> logger,
-            ISubscriptionClient subscriptionClient,
-            IWebHostEnvironment env)
+            ISubscriptionClient subscriptionClient)
         {
             _logger = logger;
             _subscriptionClient = subscriptionClient;
-            _env = env;
 
-            if (env.IsDevelopment())
-            {
-                Configuration = new ConfigurationBuilder()
-                    .SetBasePath(Directory.GetCurrentDirectory())
-                    .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true).Build();
-            }
-            else
-            {
-                Configuration = new ConfigurationBuilder()
+            Configuration = new ConfigurationBuilder()
                 .SetBasePath(Directory.GetCurrentDirectory())
+                .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
                 .AddJsonFile("appsettings.Release.json", optional: true, reloadOnChange: true).Build();
-            }
+
         }
 
         protected override async Task ExecuteAsync(CancellationToken stoppingToken)
         {
+
             var hubConnection = new HubConnectionBuilder().WithUrl(Configuration["SignalRUrl"]).Build();
             await hubConnection.StartAsync();
 
