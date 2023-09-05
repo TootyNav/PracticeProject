@@ -11,7 +11,7 @@ var configuration = new ConfigurationBuilder().AddUserSecrets<Program>().Build()
 
 builder.Services.AddSingleton<ISubscriptionClient>(x =>
     new SubscriptionClient(
-        configuration["ServiceBus:CONNECTION_STRING"],
+        configuration["ServiceBus:CONNECTIONSTRING"],
         configuration["ServiceBus:TopicName"],
         configuration["ServiceBus:SubscriptionName"]));
 
